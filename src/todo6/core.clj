@@ -6,7 +6,7 @@
 (defn- parse-todo-file [filename]
   (def todo 
     (let [todo-seq (string/split-lines (slurp filename))] 
-      (into (sorted-map) (zipmap [1 2 3 4 5 6] todo-seq))))
+      (into (sorted-map) (zipmap (range 1 (inc (count todo-seq))) todo-seq))))
   (pprint/pprint todo))
 
 
