@@ -8,11 +8,13 @@
   (format "Too many tasks. Trim down %s to %d lines\n" todo-file max-tasks))
 
 (defn- validate-todo-contents [tasks]
+  "Validates the contents of the todo file"
   (when (> (count tasks) max-tasks) 
     (println abort-msg-format)
     (System/exit 0)))
 
 (defn- parse-todo-file []
+  "Parses out the tasks from the todo file"
   (def tasks 
     (let [lines (string/split-lines
       (try
