@@ -14,8 +14,12 @@
 
 (defn- parse-todo-file []
   (def tasks 
-    (let [lines (string/split-lines (slurp todo-file))] 
-      (into (sorted-map) (zipmap (range 1 (inc (count lines))) lines))))
+    (let [lines (string/split-lines
+      (try
+        (slurp todo-file)
+        (catch Exception e
+          (printf "Error: ") (.getMessage e))))]
+            (into (sorted-map) (zipmap (range 1 (inc (count lines))) lines))))
   (validate-todo-contents tasks)
   (pprint/pprint tasks))
 
