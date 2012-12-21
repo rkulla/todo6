@@ -36,6 +36,8 @@
     (prompt-user-input)]
       (cond
         (is-in input "ls" "list") (pprint/pprint tasks)
+        (apply is-in input (map str (range 1 (inc max-tasks))))
+          (println (get tasks (Integer. input)))
         (is-in input "exit" "quit") (exit)
         (is-in input "?" "help") (println help-message)
         :else (println "No such command." help-message))

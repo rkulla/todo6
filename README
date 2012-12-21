@@ -3,19 +3,38 @@
 Todo6 is an app I created after a long time spent writing to-do lists that
 contained more than 6 items.
 
-I believe in the "don't put more than 6 items on a todo list" philosophy 
-because it rarely did I accomplish more than 6 things at a time. And if
-I do complete all 6, then great. I can then start another list -- even
-if it's in the same day -- and feel a lot more accomplished than 
-completing "only" 6 things on a 20 line list.
+Q: Why limit yourself to 6 items?
+A: First of all, this is a 'main' todo list. It's not necessarily the only
+   list you'll make in a given day. For example, my main todo list in todo6
+   might contain "shopping" but actual shopping list (bananas, eggs, OJ) 
+   would be in a separate list on my iPhone, for example. I also like to
+   make separate "focus" lists in a productivity app such as a "Pomodoro"
+   app where my todo6 list might say "Read chapter 5 of Programming Python"
+   and my pomodoro list would have focused task items such as "Do exercise 1",
+   "Do exercise 2", etc.
 
-And because the list is so small, it's very easy to not bother storing
-it in a database anything. It's small enough to remember.
+   I believe in the "don't put more than 6 items on a todo list" philosophy 
+   because it rarely did I accomplish more than 6 macro tasks at a time. If
+   I do complete all 6, then great. I can then start another list -- even
+   if it's in the same day -- and feel a lot more accomplished than 
+   completing "only" 6 things on a 20 line list.
 
+Q: Why do I have to input tasks in a separate text file instead of in
+   the app directly?
+A: This is mainly because the app keeps everything in memory so if you
+   close the app it would be gone - and if "rebooting" was on your todo
+   list, you could do so without losing your todo list for the day. And
+   since it only holds 6 items at a time, a real database feels overkill.
+   I also prefer being able to use a real text editor for adding tasks.
+   And keeping it in a separate file allows you to easily print it, or
+   move it to a shared/cloud folder for access on other devices, etc.
 
 Q: Why an app at all - isn't the text file enough?
 A: Sure. But I wanted something that would force me to only put 6 items
-   in my lists at a time.
+   in my lists at a time. The app won't even allow you to add new items
+   from inside it. Instead you have to go to edit the text file and 
+   rerun the app, and if the file contains more than 6 things it won't 
+   open.
 
 Q: Why a command-line todo app?
 
