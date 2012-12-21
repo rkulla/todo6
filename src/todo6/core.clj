@@ -6,6 +6,7 @@
 (def max-tasks 6)
 (def abort-message
   (format "Too many tasks. Trim down %s to %d lines\n" todo-file max-tasks))
+(def help-message "Commands: ?/help, ls/list, quit/exit")
 (def prompt "> ")
 
 (defn- validate-todo-contents [tasks]
@@ -14,17 +15,23 @@
     (println abort-message)
     (System/exit 0)))
 
-(defn prompt-user-input []
+(defn- prompt-user-input []
   "Show a prompt and user input"
   (print prompt)
   (flush)
   (read-line))
 
-(defn get-commands [tasks]
+(defn- is-in [s & args]
+  "Checks if a string is in the argument list"
+  (if (some (partial = s) args)
+    true false))
+
+(defn- get-commands [tasks]
   "Repeatedly get user commands"
+  (println help-message) 
   (loop [input  
     (prompt-user-input)]
-      (when (= input "ls")
+      (if (is-in input "ls" "list")
         (pprint/pprint tasks))
         (recur (prompt-user-input))))
 
