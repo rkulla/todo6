@@ -2,14 +2,19 @@
   (:require [clojure.string :as string]
             [clojure.pprint :as pprint]))
 
+(def todo-file (str (System/getenv "HOME") "/todo6.txt"))
 
-(defn- parse-todo-file [filename]
+(def max-tasks 6)
+
+(defn- parse-todo-file []
   (def todo 
-    (let [todo-seq (string/split-lines (slurp filename))] 
-      (into (sorted-map) (zipmap (range 1 (inc (count todo-seq))) todo-seq))))
+    (let [tasks (string/split-lines (slurp todo-file))] 
+      (into (sorted-map) (zipmap (range 1 (inc (count tasks))) tasks))))
+  (when (> (count todo) max-tasks) 
+    (println "Too many tasks." "Trim down" todo-file "to" max-tasks "\n")
+    (System/exit 0))
   (pprint/pprint todo))
 
 
 (defn -main [& args]
-  (def home (System/getenv "HOME"))
-  (parse-todo-file (str home "/todo6.txt")))
+  (parse-todo-file))

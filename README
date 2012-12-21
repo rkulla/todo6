@@ -1,13 +1,43 @@
 # todo6
 
-FIXME: write description
+Todo6 is an app I created after a long time spent writing to-do lists that
+contained more than 6 items.
+
+I believe in the "don't put more than 6 items on a todo list" philosophy 
+because it rarely did I accomplish more than 6 things at a time. And if
+I do complete all 6, then great. I can then start another list -- even
+if it's in the same day -- and feel a lot more accomplished than 
+completing "only" 6 things on a 20 line list.
+
+And because the list is so small, it's very easy to not bother storing
+it in a database anything. It's small enough to remember.
+
+
+Q: Why an app at all - isn't the text file enough?
+A: Sure. But I wanted something that would force me to only put 6 items
+   in my lists at a time.
+
+Q: Why a command-line todo app?
+
+A: Because I don't like my GUI todo apps that show up everytime I'm
+alternating windows with Alt+Tab. I prefer to keep todo6 running in a
+screen or tmux window, out of my way.
 
 ## Usage
 
-FIXME: write
+Create a file in your home directory called todo6.txt and put one task
+per line. (create no more than 6 lines!)
+
+Then, assuming you got this todo6 as a jar file, run the todo6 app with:
+
+    $ java -jar todo6.jar
+
+If you just have the source code and have leiningen:
+
+    $ lein run
 
 ## License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2012 Ryan Kulla
 
 Distributed under the Eclipse Public License, the same as Clojure.
