@@ -9,11 +9,14 @@
 (def help-message "Commands: ?/help, ls/list, quit/exit")
 (def prompt "> ")
 
+(defn- exit []
+  (System/exit 0))
+
 (defn- validate-todo-contents [tasks]
   "Validates the contents of the todo file"
   (when (> (count tasks) max-tasks) 
     (println abort-message)
-    (System/exit 0)))
+    (exit)))
 
 (defn- prompt-user-input []
   "Show a prompt and user input"
@@ -31,8 +34,11 @@
   (println help-message) 
   (loop [input  
     (prompt-user-input)]
-      (if (is-in input "ls" "list")
-        (pprint/pprint tasks))
+      (cond
+        (is-in input "ls" "list") (pprint/pprint tasks)
+        (is-in input "exit" "quit") (exit)
+        (is-in input "?" "help") (println help-message)
+        :else (println "No such command." help-message))
         (recur (prompt-user-input))))
 
 (defn- parse-todo-file []
