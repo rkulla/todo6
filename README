@@ -34,7 +34,7 @@ Then, assuming you got this todo6 as a jar file, run the todo6 app with:
 
 If you just have the source code and have leiningen:
 
-    $ lein run
+    $ lein trampoline run
 
 ## License
 
