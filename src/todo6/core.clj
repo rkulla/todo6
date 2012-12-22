@@ -41,7 +41,7 @@
         (is-in input "exit" "quit") (exit)
         (is-in input "?" "help") (println help-message)
         (.startsWith input "done") (println 
-          (get-in tasks [(Integer. (first (re-seq #"\d" input))) :status]))
+          (update-in tasks [(Integer. (first (re-seq #"\d" input))) :status] "done"))
         :else (println "No such command." help-message))
         (recur (prompt-user-input))))
 
