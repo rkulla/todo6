@@ -55,6 +55,20 @@ If you just have the source code and have leiningen:
 
     $ lein trampoline run
 
+You'll then see a '>' prompt where you can type commands:  To show all
+the pending tasks, type:
+
+    > ls
+
+You'll notice the tasks are assigned numbers. You can use the numbers to
+referene the tasks. For example, to see task 2:
+
+    > 2
+
+To mark task 2 as completed:
+
+    > done 2
+
 ## License
 
 Copyright (C) 2012 Ryan Kulla
