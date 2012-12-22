@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [clojure.pprint :as pprint]))
 
+;; Configuration
 (def todo-file (str (System/getenv "HOME") "/todo6.txt"))
 (def max-tasks 6)
 (def abort-message
@@ -10,6 +11,7 @@
 (def prompt "> ")
 
 (defn- exit []
+  "Shutdowns the application"
   (System/exit 0))
 
 (defn- validate-todo-contents [tasks]
@@ -25,11 +27,12 @@
   (read-line))
 
 (defn- is-in [s & args]
-  "Checks if a string is in the argument list"
+  "Returns boolean if a string is in the argument list"
   (if (some (partial = s) args)
     true false))
 
 (defn- get-first-int [s]
+  "Returns integer value of first number in string"
   (Integer. (first (re-seq #"\d" s))))
 
 (defn- get-commands [tasks]
