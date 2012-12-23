@@ -35,13 +35,18 @@
   "Returns integer value of first number in string"
   (Integer. (first (re-seq #"\d" s))))
 
+(defn- show-all-tasks [tasks]
+  "Print out all the tasks in a nice format"
+  (doseq [[k v] @tasks] 
+    (printf "%d (%s) %s\n" k (get-in @tasks [k :status]) (get-in @tasks [k :name]))))
+
 (defn- get-commands [tasks]
   "Repeatedly get user commands"
   (println help-message) 
   (loop [input  
     (prompt-user-input)]
       (cond
-        (is-in input "ls" "list") (pprint/pprint @tasks)
+        (is-in input "ls" "list") (show-all-tasks tasks)
         (apply is-in input (map str (range 1 (inc max-tasks))))
           (println (get @tasks (Integer. input)))
         (is-in input "exit" "quit") (exit)
@@ -62,7 +67,7 @@
             (print "Error: ") (.getMessage e))))]
                 (into (sorted-map) (zipmap (range 1 (inc (count lines)))
                 (map-indexed 
-                    (fn [idx itm] idx {:name itm, :status "pending"}) lines))))))
+                    (fn [idx itm] idx {:name itm, :status "todo"}) lines))))))
   (validate-todo-contents tasks)
   (get-commands tasks))
 
