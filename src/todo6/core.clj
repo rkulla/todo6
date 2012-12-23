@@ -36,6 +36,7 @@
   (Integer. (first (re-seq #"\d" s))))
 
 (defn- change-task-val [tasks task-num prop v]
+  "Lets you change the value in our nested todo data structure"
   (swap! tasks assoc-in [task-num prop] v))
 
 (defn- show-task [tasks i]
@@ -58,9 +59,9 @@
           (show-task tasks (Integer. input))
         (is-in input "exit" "quit") (exit)
         (is-in input "?" "help") (println help-message)
-        (.startsWith input "done") 
+        (and (.startsWith input "done") (> (count input) 4))
           (change-task-val tasks (get-first-int input) :status "done")
-        (.startsWith input "undone") 
+        (and (.startsWith input "undone") (> (count input) 6))
           (change-task-val tasks (get-first-int input) :status "todo")
         :else (println "No such command." help-message))
         (recur (prompt-user-input))))
