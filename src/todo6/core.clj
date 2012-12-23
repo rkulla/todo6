@@ -7,7 +7,7 @@
 (def max-tasks 6)
 (def abort-message
   (format "Too many tasks. Trim down %s to %d lines\n" todo-file max-tasks))
-(def help-message "Commands: ?/help, ls/list, quit/exit, 1-6, done 1-6")
+(def help-message "?/help, ls/list/todo, quit/exit, 1-6, done 1-6, undone 1-6")
 (def prompt "> ")
 
 (defn- exit []
@@ -35,6 +35,9 @@
   "Returns integer value of first number in string"
   (Integer. (first (re-seq #"\d" s))))
 
+(defn- change-task-val [tasks task-num prop v]
+  (swap! tasks assoc-in [task-num prop] v))
+
 (defn- show-task [tasks i]
   "Print out a single task in a nice format"
   (printf "%d (%s) %s\n" i (get-in @tasks [i :status]) 
@@ -50,13 +53,15 @@
   (loop [input  
     (prompt-user-input)]
       (cond
-        (is-in input "ls" "list") (show-all-tasks tasks)
+        (is-in input "ls" "list" "todo") (show-all-tasks tasks)
         (apply is-in input (map str (range 1 (inc max-tasks))))
           (show-task tasks (Integer. input))
         (is-in input "exit" "quit") (exit)
         (is-in input "?" "help") (println help-message)
         (.startsWith input "done") 
-          (swap! tasks assoc-in [(get-first-int input) :status] "done")
+          (change-task-val tasks (get-first-int input) :status "done")
+        (.startsWith input "undone") 
+          (change-task-val tasks (get-first-int input) :status "todo")
         :else (println "No such command." help-message))
         (recur (prompt-user-input))))
 
