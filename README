@@ -30,9 +30,9 @@ A: This is mainly because the app keeps everything in memory so if you
    move it to a shared/cloud folder for access on other devices, etc.
 
 Q: Why an app at all - isn't the text file enough?
-A: Sure. But I wanted something that would force me to only put 6 items
-   in my lists at a time. The app won't even allow you to add new items
-   from inside it. Instead you have to go to edit the text file and 
+A: Sure. However, I wanted something that would force me to only put 6 
+   items in my lists at a time. The app won't even allow you to add new
+   items from inside it. Instead you have to go to edit the text file and 
    rerun the app, and if the file contains more than 6 things it won't 
    open.
 
