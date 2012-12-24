@@ -10,11 +10,29 @@
 (def help-message "?/help, ls/list/todo, quit/exit, 1-6, done 1-6, undone 1-6")
 (def prompt "> ")
 
+(defn- get-file-contents [filename]
+  "Reads in the contents of a file and prints any errors"
+  (try
+    (slurp filename)
+    (catch Exception e
+      (print "Error: ") (.getMessage e))))
+
+(defn- format-lines [lines]
+  "Puts the todo tasks in a certain format"
+  (map-indexed 
+   (fn [idx itm] idx {:name itm, :status "todo"}) lines))
+
+(def tasks 
+  (atom
+   (let [lines (string/split-lines (get-file-contents todo-file))]
+     (into (sorted-map) (zipmap (range 1 (inc (count lines)))
+                                (format-lines lines))))))
+
 (defn- exit []
   "Shutdowns the application"
   (System/exit 0))
 
-(defn- validate-todo-contents [tasks]
+(defn- validate-todo-contents []
   "Validates the contents of the todo file"
   (when (> (count @tasks) max-tasks) 
     (println abort-message)
@@ -35,51 +53,37 @@
   "Returns integer value of first number in string"
   (Integer. (first (re-seq #"\d" s))))
 
-(defn- change-task-val [tasks task-num prop v]
+(defn- change-task-val [task-num prop v]
   "Lets you change the value in our nested todo data structure"
   (swap! tasks assoc-in [task-num prop] v))
 
-(defn- show-task [tasks i]
+(defn- show-task [i]
   "Print out a single task in a nice format"
   (printf "%d (%s) %s\n" i (get-in @tasks [i :status]) 
           (get-in @tasks [i :name])))
 
-(defn- show-all-tasks [tasks]
+(defn- show-all-tasks []
   "Print out all the tasks in a nice format"
-  (doseq [[i] @tasks] (show-task tasks i)))
+  (doseq [[i] @tasks] (show-task i)))
 
-(defn- get-commands [tasks]
+(defn- get-commands []
   "Repeatedly get user commands"
   (println help-message) 
   (loop [input  
          (prompt-user-input)]
     (cond
-     (is-in input "ls" "list" "todo") (show-all-tasks tasks)
+     (is-in input "ls" "list" "todo") (show-all-tasks)
      (apply is-in input (map str (range 1 (inc max-tasks))))
-     (show-task tasks (Integer. input))
+     (show-task (Integer. input))
      (is-in input "exit" "quit") (exit)
      (is-in input "?" "help") (println help-message)
-     (and (.startsWith input "done") (> (count input) 4))
-     (change-task-val tasks (get-first-int input) :status "done")
-     (and (.startsWith input "undone") (> (count input) 6))
-     (change-task-val tasks (get-first-int input) :status "todo")
+     (and (.startsWith input "done") (> (count input) 5))
+     (change-task-val (get-first-int input) :status "done")
+     (and (.startsWith input "undone") (> (count input) 7))
+     (change-task-val (get-first-int input) :status "todo")
      :else (println "No such command." help-message))
     (recur (prompt-user-input))))
 
-(defn- parse-todo-file []
-  "Parses out the tasks from the todo file"
-  (def tasks 
-    (atom
-     (let [lines (string/split-lines
-                  (try
-                    (slurp todo-file)
-                    (catch Exception e
-                      (print "Error: ") (.getMessage e))))]
-       (into (sorted-map) (zipmap (range 1 (inc (count lines)))
-                                  (map-indexed 
-                                   (fn [idx itm] idx {:name itm, :status "todo"}) lines))))))
-  (validate-todo-contents tasks)
-  (get-commands tasks))
-
 (defn -main [& args]
-  (parse-todo-file))
+  (validate-todo-contents)
+  (get-commands))
