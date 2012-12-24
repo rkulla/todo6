@@ -4,8 +4,8 @@ Todo6 is a very simple app that I created after getting tired of writing
 to-do lists that contained more than 6 items.
 
 Q: Why limit yourself to 6 items?
-A: First of all, this is a *main* todo list. It's not necessarily the only
-   list you'll make in a given day. For example, my main todo list in todo6
+A: First, this is a *main* todo list. It's not necessarily the only list 
+   I'll make in a given day. For example, my main todo list in todo6
    might contain "shopping" but actual shopping list (bananas, eggs, OJ) 
    would be in a separate list on my iPhone.
 
