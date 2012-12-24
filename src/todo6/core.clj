@@ -42,7 +42,7 @@
 (defn- show-task [tasks i]
   "Print out a single task in a nice format"
   (printf "%d (%s) %s\n" i (get-in @tasks [i :status]) 
-                           (get-in @tasks [i :name])))
+          (get-in @tasks [i :name])))
 
 (defn- show-all-tasks [tasks]
   "Print out all the tasks in a nice format"
@@ -52,32 +52,32 @@
   "Repeatedly get user commands"
   (println help-message) 
   (loop [input  
-    (prompt-user-input)]
-      (cond
-        (is-in input "ls" "list" "todo") (show-all-tasks tasks)
-        (apply is-in input (map str (range 1 (inc max-tasks))))
-          (show-task tasks (Integer. input))
-        (is-in input "exit" "quit") (exit)
-        (is-in input "?" "help") (println help-message)
-        (and (.startsWith input "done") (> (count input) 4))
-          (change-task-val tasks (get-first-int input) :status "done")
-        (and (.startsWith input "undone") (> (count input) 6))
-          (change-task-val tasks (get-first-int input) :status "todo")
-        :else (println "No such command." help-message))
-        (recur (prompt-user-input))))
+         (prompt-user-input)]
+    (cond
+     (is-in input "ls" "list" "todo") (show-all-tasks tasks)
+     (apply is-in input (map str (range 1 (inc max-tasks))))
+     (show-task tasks (Integer. input))
+     (is-in input "exit" "quit") (exit)
+     (is-in input "?" "help") (println help-message)
+     (and (.startsWith input "done") (> (count input) 4))
+     (change-task-val tasks (get-first-int input) :status "done")
+     (and (.startsWith input "undone") (> (count input) 6))
+     (change-task-val tasks (get-first-int input) :status "todo")
+     :else (println "No such command." help-message))
+    (recur (prompt-user-input))))
 
 (defn- parse-todo-file []
   "Parses out the tasks from the todo file"
   (def tasks 
     (atom
-        (let [lines (string/split-lines
-        (try
-            (slurp todo-file)
-            (catch Exception e
-            (print "Error: ") (.getMessage e))))]
-                (into (sorted-map) (zipmap (range 1 (inc (count lines)))
-                (map-indexed 
-                    (fn [idx itm] idx {:name itm, :status "todo"}) lines))))))
+     (let [lines (string/split-lines
+                  (try
+                    (slurp todo-file)
+                    (catch Exception e
+                      (print "Error: ") (.getMessage e))))]
+       (into (sorted-map) (zipmap (range 1 (inc (count lines)))
+                                  (map-indexed 
+                                   (fn [idx itm] idx {:name itm, :status "todo"}) lines))))))
   (validate-todo-contents tasks)
   (get-commands tasks))
 
