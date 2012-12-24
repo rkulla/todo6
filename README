@@ -1,9 +1,7 @@
 # todo6
 
-Todo6 is a very simple app that I made to help learn Clojure. 
-
-I wanted a *main* todo list app that forces me to only put 6 things at 
-a time. 
+Todo6 is a very simple app that I made because I wanted a *main* to-do
+list app that forces me to only put 6 things at a time. 
 
 It's not necessarily the only list I'll make in a given day. For example,
 my main todo list in todo6 might contain "shopping" but actual shopping 
