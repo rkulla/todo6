@@ -1,29 +1,22 @@
 # todo6
 
-Todo6 is a very simple app that I created after getting tired of writing
-to-do lists that contained more than 6 items.
+Todo6 is a very simple app that I made to help learn Clojure. 
 
-Q: Why limit yourself to 6 items?
-A: First, this is a *main* todo list. It's not necessarily the only list 
-   I'll make in a given day. For example, my main todo list in todo6
-   might contain "shopping" but actual shopping list (bananas, eggs, OJ) 
-   would be in a separate list on my iPhone.
+I wanted a *main* todo list app that forces me to only put 6 things at 
+a time. 
 
-   I believe in the "don't put more than 6 items on a todo list" philosophy 
-   because rarely did I accomplish more than 6 macro tasks per day. If I do
-   complete all 6, then great - I can then start another list and feel a 
-   lot more accomplished than completing "only" 6 things on a 20 line list.
+It's not necessarily the only list I'll make in a given day. For example,
+my main todo list in todo6 might contain "shopping" but actual shopping 
+list (bananas, eggs, OJ) would be in a separate list on my smart phone.
 
-Q: Why an app at all - isn't the text file enough?
-A: Sure. However, I wanted something that would force me to only put 6 
-   items in my lists at a time. The app won't even allow you to add new
-   items from inside it. Instead, you have to go to edit the text file and 
-   rerun the app and, if the file contains more than 6 things, it won't open.
+I believe in the "don't put more than 6 items on a todo list" philosophy 
+because rarely did I accomplish more than 6 macro tasks per day. If I do
+complete all 6, then great - I can then start another list and feel a 
+lot more accomplished than completing "only" 6 things on a 20 line list.
 
-Q: Why a command-line todo app?
-A: Because I don't like my GUI todo apps that show up everytime I'm
-   alternating windows with Alt+Tab. I prefer to keep todo6 running in a
-   screen or tmux window, out of my way.
+Why a command-line todo app? Because I don't like my GUI todo apps that 
+show up everytime I'm alternating windows with Alt+Tab. I prefer to keep 
+todo6 running in a gnu screen or tmux window, out of my way.
 
 ## Usage
 
