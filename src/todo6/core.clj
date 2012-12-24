@@ -28,6 +28,10 @@
      (into (sorted-map) (zipmap (range 1 (inc (count lines)))
                                 (format-lines lines))))))
 
+(def get-task-range []
+  "Return a seq of task numbers from 1 to max-tasks"
+  (range 1 (inc max-tasks))
+
 (defn- exit []
   "Shutdowns the application"
   (System/exit 0))
@@ -56,7 +60,7 @@
 
 (defn- change-task-val [task-num prop v]
   "Lets you change the value in our nested todo data structure"
-  (if (is-in task-num (range 1 (inc max-tasks)))
+  (if (is-in task-num (get-task-range))
     (swap! tasks assoc-in [task-num prop] v)))
 
 (defn- show-task [i]
@@ -74,7 +78,7 @@
          (prompt-user-input)]
     (cond
      (is-in input "ls" "list" "todo") (show-all-tasks)
-     (apply is-in input (map str (range 1 (inc max-tasks))))
+     (apply is-in input (map str (get-task-range)))
      (show-task (Integer. input))
      (is-in input "exit" "quit") (exit)
      (is-in input "?" "help") (println help-message)
