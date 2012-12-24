@@ -54,14 +54,14 @@
     true 
     false))
 
-(defn- get-first-int [s]
-  "Returns integer value of first number in string"
-  (Integer. (first (re-seq #"\d" s))))
+(defn- get-first-number [s]
+  "Returns first number in string (as a string)"
+  (first (re-seq #"\d" s)))
 
 (defn- change-task-val [task-num prop v]
   "Lets you change the value in our nested todo data structure"
-  (if (is-in task-num (get-task-range))
-    (swap! tasks assoc-in [task-num prop] v)))
+  (if (apply is-in task-num (map str (get-task-range)))
+    (swap! tasks assoc-in [(Integer. task-num) prop] v)))
 
 (defn- show-task [i]
   "Print out a single task in a nice format"
@@ -83,9 +83,9 @@
      (is-in input "exit" "quit") (exit)
      (is-in input "?" "help") (println help-message)
      (and (.startsWith input "done") (> (count input) 5))
-     (change-task-val (get-first-int input) :status "done")
+     (change-task-val (get-first-number input) :status "done")
      (and (.startsWith input "undone") (> (count input) 7))
-     (change-task-val (get-first-int input) :status "todo")
+     (change-task-val (get-first-number input) :status "todo")
      :else (println "No such command." help-message))
     (recur (prompt-user-input))))
 
