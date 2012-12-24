@@ -28,9 +28,9 @@
      (into (sorted-map) (zipmap (range 1 (inc (count lines)))
                                 (format-lines lines))))))
 
-(def get-task-range []
+(defn- get-task-range []
   "Return a seq of task numbers from 1 to max-tasks"
-  (range 1 (inc max-tasks))
+  (range 1 (inc max-tasks)))
 
 (defn- exit []
   "Shutdowns the application"
