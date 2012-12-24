@@ -68,7 +68,6 @@
 
 (defn- get-commands []
   "Repeatedly get user commands"
-  (println help-message) 
   (loop [input  
          (prompt-user-input)]
     (cond
@@ -86,4 +85,7 @@
 
 (defn -main [& args]
   (validate-todo-contents)
+  (println help-message) 
+  (newline)
+  (show-all-tasks)
   (get-commands))
