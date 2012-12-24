@@ -44,10 +44,11 @@
   (flush)
   (read-line))
 
-(defn- is-in [s & args]
-  "Returns boolean if a string is in the argument list"
-  (if (some (partial = s) args)
-    true false))
+(defn- is-in [val & args]
+  "Returns boolean if a value is contained in the argument list"
+  (if (some (partial = val) args)
+    true 
+    false))
 
 (defn- get-first-int [s]
   "Returns integer value of first number in string"
@@ -55,7 +56,8 @@
 
 (defn- change-task-val [task-num prop v]
   "Lets you change the value in our nested todo data structure"
-  (swap! tasks assoc-in [task-num prop] v))
+  (if (is-in task-num (range 1 (inc max-tasks)))
+    (swap! tasks assoc-in [task-num prop] v)))
 
 (defn- show-task [i]
   "Print out a single task in a nice format"
