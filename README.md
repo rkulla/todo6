@@ -1,20 +1,12 @@
 # todo6
 
-Todo6 is a Clojure app that I made because I wanted a *main* to-do
-list app that forces me to only put 6 things at a time. 
+Todo6 is a app that I made because I wanted a *main* to-do
+list app that forces me to only add 6 things at a time (per day). I also
+made it to help me learn Clojure.
 
 It's not necessarily the only list I'll make in a given day. For example,
 my main todo list in todo6 might contain "shopping" but actual shopping 
 list (bananas, eggs, OJ) would be in a separate list on my smart phone.
-
-I believe in the "don't put more than 6 items on a todo list" philosophy 
-because rarely did I accomplish more than 6 macro tasks per day. If I do
-complete all 6, then great - I can then start another list and feel a 
-lot more accomplished than completing "only" 6 things on a 20 line list.
-
-Why a command-line todo app? Because I don't like my GUI todo apps that 
-show up everytime I'm alternating windows with Alt+Tab. I prefer to keep 
-todo6 running in a gnu screen or tmux window, out of my way.
 
 ## Usage
 
