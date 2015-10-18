@@ -8,6 +8,10 @@ It's not necessarily the only list I'll make in a given day. For example,
 my main todo list in todo6 might contain "shopping" but actual shopping 
 list (bananas, eggs, OJ) would be in a separate list on my smart phone.
 
+If you have read the book `Essentialism: The Disciplined Pursuit of Less` by Greg McKeown
+then you would write out 6 tasks, in order of priority, then mark everything but the
+first task as done and just focus on that task for 90 minutes.
+
 ## Usage
 
 Create a file in your home directory called todo6.txt and put one task
